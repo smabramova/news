@@ -1,0 +1,60 @@
+<!-- templates/news/base.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Новости</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        header, footer {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Новости</h1>
+        <a href="{% url 'admin:index' %}" style="color: #fff;">Админка</a>
+    </header>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <p>&copy; 2024 Ваш сайт</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Новости</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  header { background: #f0f0f0; padding: 10px; }
+  a { text-decoration: none; color: #333; }
+  .article { border-bottom: 1px solid #ccc; padding: 10px 0; }
+  .search { margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Новости</h1>
+  <form method="get" class="search">
+    <input type="text" name="q" placeholder="Фильтр по заголовку" value="{{ request.GET.q }}">
+    <button type="submit">Поиск</button>
+  </form>
+</header>
+{% block content %}{% endblock %}
+</body>
+</html>

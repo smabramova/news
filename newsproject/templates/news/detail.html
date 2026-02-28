@@ -1,0 +1,22 @@
+<!-- templates/news/detail.html -->
+{% extends 'news/base.html' %}
+
+{% block content %}
+<h2>{{ article.title }}</h2>
+<p><strong>Автор:</strong> {{ article.author }}</p>
+<p><strong>Дата публикации:</strong> {{ article.created_at|date:"d M Y" }}</p>
+<div>
+    {{ article.content|linebreaks }}
+</div>
+{% if not article.is_published %}
+<p><em>Это черновик. Пока он не опубликован.</em></p>
+{% endif %}
+{% endblock %}
+
+{% extends 'news/base.html' %}
+{% block content %}
+<h2>{{ article.title }}</h2>
+<p>Автор: {{ article.author.username }}, опубликовано: {{ article.created_at }}</p>
+<div>{{ article.content|linebreaks }}</div>
+<a href="{% url 'news-list' %}">Назад к списку</a>
+{% endblock %}

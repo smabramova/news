@@ -1,0 +1,38 @@
+<!-- templates/news/home.html -->
+{% extends 'news/base.html' %}
+
+{% block content %}
+<h2>Последние новости</h2>
+<form method="get">
+    <input type="text" name="title" placeholder="Фильтр по заголовку" value="{{ request.GET.title }}">
+    <button type="submit">Искать</button>
+</form>
+<ul>
+    {% for article in articles %}
+        <li>
+            <a href="{% url 'article-detail' article.pk %}">{{ article.title }}</a> 
+ - {{ article.created_at|date:"d M Y" }} 
+{% if not article.is_published %}(Черновик){% endif %}
+        </li>
+    {% empty %}
+        <li>Нет новостей</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% extends 'news/base.html' %}
+
+{% block content %}
+<h2>Добро пожаловать на мой сайт!</h2>
+{% endblock %}
+{% extends 'news/base.html' %}
+{% block content %}
+<h2>Последние новости</h2>
+{% for article in articles %}
+<div class="article">
+  <h3><a href="{% url 'article-detail' article.pk %}">{{ article.title }}</a></h3>
+  <p>Автор: {{ article.author.username }}, дата: {{ article.created_at }}</p>
+</div>
+{% empty %}
+<p>Нет новостей</p>
+{% endfor %}
+{% endblock %}
